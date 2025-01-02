@@ -1,11 +1,15 @@
-using Components;
-using Data;
+using Game.Data;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using Systems.Player;
+using Game.Systems.PlayerControl;
 using UnityEngine;
+using Game.Systems.Move;
+using Systems;
+using Game.Systems.Health;
+using Game.Systems.Animation;
+using Game.UI.Views;
 
-namespace Systems
+namespace Game
 {
     public class Index : MonoBehaviour
     {
@@ -28,6 +32,8 @@ namespace Systems
                 .Add(new GameInitSystem())
                 .Add(new PlayerInitSystem())
                 .Add(new PlayerInputSystem())
+                .Add(new HealthSystem())
+                .Add(new AnimationSystem())
                 .Inject(staticData, sceneData, playerInput);
 
             fixedUpdateSystems

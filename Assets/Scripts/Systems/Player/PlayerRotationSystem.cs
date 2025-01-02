@@ -1,13 +1,10 @@
-using Components;
+using Game.Components;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Systems.Player
+namespace Game.Systems.PlayerControl
 {
     public class PlayerRotationSystem : IEcsRunSystem
     {

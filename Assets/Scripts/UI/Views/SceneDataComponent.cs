@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.Tilemaps;
 using Unity.Cinemachine;
 
-namespace Components
+namespace Game.UI.Views
 {
     public class SceneDataComponent : MonoBehaviour
     {

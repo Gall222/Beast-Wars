@@ -1,8 +1,6 @@
-using Leopotam.EcsLite;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Data
+namespace Game.Data
 {
     [CreateAssetMenu]
     public class StaticData : ScriptableObject

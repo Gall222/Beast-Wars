@@ -1,0 +1,22 @@
+{
+    "name": "PlayerControl",
+    "rootNamespace": "",
+    "references": [
+        "UI",
+        "Data",
+        "Components",
+        "Leopotam.EcsLite",
+        "Leopotam.EcsLite.Di",
+        "Unity.InputSystem",
+        "Unity.Cinemachine"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

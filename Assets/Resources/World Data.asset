@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7140e7fb7ac4e3146a2e8b8836b58812, type: 3}
   m_Name: World Data
   m_EditorClassIdentifier: 
+  testPref: {fileID: 5096443563000575738, guid: 5dfefda48901403408e48e5663608e12, type: 3}
   speed: 1500
   jumpSpeed: 2000

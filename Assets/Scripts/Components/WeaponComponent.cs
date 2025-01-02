@@ -1,6 +1,8 @@
-namespace Components
+using Game.UI.Views;
+
+namespace Game.Components
 {
-    struct WeaponComponent {
+    public struct WeaponComponent {
         public Weapon view;
     }
 }

@@ -1,16 +1,17 @@
 using Leopotam.EcsLite;
-using Components;
+using Game.Components;
 using UnityEngine;
-using Data;
+using Game.Data;
 using Leopotam.EcsLite.Di;
 
-namespace Systems
+namespace Game.Systems.Move
 {
-    sealed public class MoveSystem : IEcsRunSystem
+    public class MoveSystem : IEcsRunSystem
     {
         readonly EcsFilterInject<Inc<MoveComponent, UnitComponent>> _moveFilter = default;
 
         readonly float _moveSlowCoef = 2f;
+        readonly float _pauseBeforeJump = 0.2f;
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _moveFilter.Value)
@@ -74,7 +75,7 @@ namespace Systems
             }
 
             if (IsJumpAnimation(unitComponent) && 
-                unitComponent.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2f &&
+                unitComponent.animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= _pauseBeforeJump &&
                 !unitComponent.isJumped)
             {
                 unitComponent.rb.linearVelocity += Vector2.up * moveComponent.jumpPower;
@@ -89,7 +90,8 @@ namespace Systems
 
         private bool IsTouchingGround(UnitComponent unitComponent)
         {
-            return unitComponent.footCollider.IsTouchingLayers(LayerMask.GetMask("Ground", "Active Stuff"));
+            return unitComponent.footCollider.IsTouchingLayers(LayerMask
+                .GetMask("Ground", "Active Stuff", "Player"));
         }
 
         private bool IsJumpAnimation(UnitComponent unitComponent)

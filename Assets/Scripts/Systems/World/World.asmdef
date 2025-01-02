@@ -1,0 +1,20 @@
+{
+    "name": "World",
+    "rootNamespace": "",
+    "references": [
+        "UI",
+        "Data",
+        "Components",
+        "Leopotam.EcsLite",
+        "Leopotam.EcsLite.Di"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

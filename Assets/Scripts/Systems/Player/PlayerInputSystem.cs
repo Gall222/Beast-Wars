@@ -1,9 +1,9 @@
 using Leopotam.EcsLite;
-using Components;
+using Game.Components;
 using UnityEngine;
 using Leopotam.EcsLite.Di;
 
-namespace Systems.Player
+namespace Game.Systems.PlayerControl
 {
     public class PlayerInputSystem : IEcsRunSystem
     {

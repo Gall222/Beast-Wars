@@ -1,6 +1,6 @@
-namespace Components
+namespace Game.Components
 {
-    struct ChangeAnimationComponent {
+    public struct ChangeAnimationComponent {
         public string animationName;
         public float duration;
     }

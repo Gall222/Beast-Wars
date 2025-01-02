@@ -1,10 +1,11 @@
+using Game.UI.Views;
 using UnityEngine;
 
-namespace Components
+namespace Game.Components
 {
     public struct PlayerComponent
     {
-        public Person view;
+        public Player view;
         public Collider2D bodyCollider;
         public BoxCollider2D footCollider;
         public CircleCollider2D headCollider;

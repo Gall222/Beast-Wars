@@ -1,12 +1,14 @@
-using Components;
+using Game.Components;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
-namespace Systems.Player
+namespace Game.Systems.PlayerControl
 {
-    sealed class HandControlSystem : IEcsRunSystem {
+    public class HandControlSystem : IEcsRunSystem
+    {
         readonly EcsFilterInject<Inc<PlayerComponent, UnitComponent, MoveComponent>> _playerFilter = default;
+        private Vector3 _initialWorldPosition = new Vector3();
 
         public void Run(IEcsSystems systems)
         {
@@ -16,47 +18,58 @@ namespace Systems.Player
                 ref var unitComponent = ref _playerFilter.Pools.Inc2.Get(entity);
 
                 var hand = playerComponent.view.hand;
+                var rb = hand.GetComponent<Rigidbody2D>();
+                _initialWorldPosition = playerComponent.view.transform.
+                    TransformPoint(playerComponent.handInitialPosition);
 
                 if (playerComponent.leftMouseDown)
                 {
-                    // ѕолучаем позицию мыши
                     Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    mousePosition.z = 0; // ”бедитесь, что z равно 0
+                    mousePosition.z = 0;
 
-                    // ¬ычисл€ем направление от родител€ руки до позиции мыши
-                    Vector3 direction = mousePosition - hand.transform.parent.position;
+                    var direction = GetDirection(mousePosition, ref playerComponent);
 
-                    // ѕровер€ем длину вектора направлени€
-                    if (direction.magnitude > playerComponent.maxHandDistance)
-                    {
-                        direction.Normalize(); // Ќормализуем вектор
-                        direction *= playerComponent.maxHandDistance; // ”множаем на максимальное рассто€ние
-                    }
-                        // ѕереводим направление в локальные координаты относительно bone_1
-                        Vector3 localDirection = hand.transform.parent.InverseTransformDirection(direction);
-                    
-                        // –ассчитываем новую позицию дл€ руки с использованием Lerp дл€ плавного движени€
-                        Vector3 targetPosition = playerComponent.handInitialPosition + localDirection;
-                        hand.transform.localPosition = Vector3.Lerp(hand.transform.localPosition, targetPosition, Time.deltaTime * playerComponent.handMoveSpeed);
-                        // ¬ычисл€ем угол дл€ вращени€ руки
-                        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // ѕолучаем угол в градусах
-                                                                                             // ”читываем зеркальное отражение персонажа
-                        if (unitComponent.transform.localScale.x < 0)
-                        {
-                            angle += 180f; // »нвертируем угол на 180 градусов дл€ зеркального отражени€
-                        }
-                        // ”станавливаем вращение руки
-                        hand.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+                    Vector3 targetPosition = _initialWorldPosition + direction;
+
+                    rb.MovePosition(Vector3.Lerp(hand.transform.position, targetPosition, 
+                        Time.deltaTime * playerComponent.handMoveSpeed));
+                    Rotate(direction, ref unitComponent, ref rb);
                 }
                 else
                 {
-                    // ≈сли кнопка не нажата, возвращаем руку в начальное положение
-                    hand.transform.localPosition = playerComponent.handInitialPosition;
-
-                    // ¬ращение можно вернуть в исходное состо€ние, если это необходимо
-                    hand.transform.rotation = Quaternion.identity; // »ли установите нужное начальное вращение
+                    rb.MovePosition(_initialWorldPosition);
+                    rb.MoveRotation(0);
                 }
             }
+        }
+
+        private Vector3 GetDirection(Vector3 mousePosition, ref PlayerComponent playerComponent)
+        {
+            Vector3 direction = mousePosition - _initialWorldPosition;
+
+            if (direction.magnitude > playerComponent.maxHandDistance)
+            {
+                direction.Normalize();
+                direction *= playerComponent.maxHandDistance;
+            }
+
+            return direction;
+        }
+
+        private void Rotate(Vector3 direction, ref UnitComponent unitComponent, ref Rigidbody2D rb)
+        {
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            if (unitComponent.transform.localScale.x < 0)
+            {
+                angle += 110f;
+            }
+            else
+            {
+                angle += 70f;
+            }
+
+            rb.MoveRotation(angle);
         }
     }
 }

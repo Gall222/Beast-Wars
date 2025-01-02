@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Components
+namespace Game.Components
 {
     public struct AnimationComponent
     {
