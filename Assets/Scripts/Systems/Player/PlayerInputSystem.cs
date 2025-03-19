@@ -2,6 +2,7 @@ using Leopotam.EcsLite;
 using Game.Components;
 using UnityEngine;
 using Leopotam.EcsLite.Di;
+using System;
 
 namespace Game.Systems.PlayerControl
 {
@@ -9,7 +10,7 @@ namespace Game.Systems.PlayerControl
     {
         readonly EcsCustomInject<PlayerInput> _playerInput = default;
         
-        private EcsFilterInject<Inc<PlayerComponent, MoveComponent>> _inputEventsFilter = default;
+        private EcsFilterInject<Inc<PlayerComponent, MoveComponent, UnitComponent>> _inputEventsFilter = default;
 
         public void Run(IEcsSystems systems)
         {
@@ -19,16 +20,24 @@ namespace Game.Systems.PlayerControl
             {
                 ref var playerComponent = ref _inputEventsFilter.Pools.Inc1.Get(entity);
                 ref var moveComponent = ref _inputEventsFilter.Pools.Inc2.Get(entity);
+                ref var unitComponent = ref _inputEventsFilter.Pools.Inc3.Get(entity);
 
                 AddDirection(ref moveComponent);
-                IsJumping(ref moveComponent);
+                IsJumping(ref unitComponent);
+                IsTouchingGround(ref unitComponent);
                 IsLeftMouseDown(ref playerComponent);
             }
         }
 
-        private void IsJumping(ref MoveComponent moveComponent)
+        private void IsTouchingGround(ref UnitComponent unitComponent)
         {
-            moveComponent.jumpButtonPressed = _playerInput.Value.Player.Jump.IsPressed();
+            unitComponent.isTouchingGround = unitComponent.footCollider.IsTouchingLayers(LayerMask
+                .GetMask("Ground", "Active Stuff", "Player", "Building"));
+        }
+
+        private void IsJumping(ref UnitComponent unitComponent)
+        {
+            unitComponent.jumpButtonPressed = _playerInput.Value.Player.Jump.IsPressed();
         }
 
         private void AddDirection(ref MoveComponent moveComponent)

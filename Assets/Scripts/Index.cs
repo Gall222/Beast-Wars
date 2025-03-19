@@ -4,10 +4,12 @@ using Leopotam.EcsLite.Di;
 using Game.Systems.PlayerControl;
 using UnityEngine;
 using Game.Systems.Move;
-using Systems;
 using Game.Systems.Health;
 using Game.Systems.Animation;
 using Game.UI.Views;
+using Game.Management;
+using Game.Systems.ButtonControl;
+using Game.Systems.World;
 
 namespace Game
 {
@@ -28,23 +30,31 @@ namespace Game
             playerInput = new PlayerInput();
             playerInput.Enable();
 
+            var buttonManager = new ButtonManager();
+            
             updateSystems
+                .Add(buttonManager)
                 .Add(new GameInitSystem())
                 .Add(new PlayerInitSystem())
                 .Add(new PlayerInputSystem())
                 .Add(new HealthSystem())
                 .Add(new AnimationSystem())
-                .Inject(staticData, sceneData, playerInput);
+                .Add(new BuildSystem())
+                .Add(new ForegroundSystem())
+
+                .Inject(staticData, sceneData, playerInput, buttonManager);
 
             fixedUpdateSystems
                 .Add(new HandControlSystem())
                 .Add(new PlayerRotationSystem())
                 .Add(new MoveSystem())
                 //.Add(new UnitStateSystem())
-                .Inject(staticData, sceneData, playerInput);
+                .Inject(staticData, sceneData, playerInput, buttonManager);
+
 
             updateSystems.Init();
             fixedUpdateSystems.Init();
+            
 
         }
         void FixedUpdate()

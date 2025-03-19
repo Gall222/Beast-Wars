@@ -7,7 +7,8 @@ namespace Game.Data
     {
         public WorldData worldData;
         public PlayerData playerData;
-        //public SoundsData soundsData;
+        public UIData UIData;
+        public BuildingData buildingData;
 
         //public Queue<EcsEntity> EnemiesEntities = new Queue<EcsEntity>();
     }

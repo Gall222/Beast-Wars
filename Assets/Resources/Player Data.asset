@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Player Data
   m_EditorClassIdentifier: 
   playerPref: {fileID: 5096443563000575738, guid: 324b46b862b1ea84e86cbc1b87005305, type: 3}
-  moveSpeed: 20
+  moveSpeed: 15
+  backMoveSpeedSlowCoef: 2
+  flySpeedSlowCoef: 3
   jumpPower: 15
-  weapon: {fileID: 210057952308529618, guid: ab85bd7cf0906134daf2536b8f6e7c1e, type: 3}
-  maxHandDistance: 1.5
+  weapon: {fileID: 7462602280253391719, guid: 8a8ee78cf5d3ff84396ca46d15f1e6ab, type: 3}
+  maxHandDistance: 2
   handMoveSpeed: 20
+  noFrictionMaterial: {fileID: 6200000, guid: 16fb4893a1113f34d9260515210d683d, type: 2}
+  normalFrictionMaterial: {fileID: 6200000, guid: 143103670a59cb045baca3087e4cf59b, type: 2}

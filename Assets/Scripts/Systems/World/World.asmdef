@@ -6,7 +6,10 @@
         "Data",
         "Components",
         "Leopotam.EcsLite",
-        "Leopotam.EcsLite.Di"
+        "Leopotam.EcsLite.Di",
+        "Unity.TextMeshPro",
+        "Management",
+        "Unity.2D.Tilemap.Extras"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

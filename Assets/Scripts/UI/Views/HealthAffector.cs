@@ -17,6 +17,8 @@ namespace Game.UI.Views
         public Rigidbody2D Rb { get { return _rb; } }
         public Vector2 ContactVelocityLimit { get { return _contactVelocityLimit; } }
 
+        public bool isActive = true;
+
         void Start()
         {
             _rb = GetComponentInChildren<Rigidbody2D>();

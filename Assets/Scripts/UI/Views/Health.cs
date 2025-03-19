@@ -27,14 +27,17 @@ namespace Game.UI.Views
 
         public void Awake()
         {
-            _spriteRendererHpIndicator = _hpIndicator.GetComponent<SpriteRenderer>();
+            if(_hpIndicator != null)
+            {
+                _spriteRendererHpIndicator = _hpIndicator.GetComponent<SpriteRenderer>();
+            }
             _animator = GetComponent<Animator>();
         }
         public void OnCollisionEnter2D(Collision2D collision)
         {
             affectorCollision = collision;
             isTouched = true;
-            Debug.Log(gameObject.name + " " + collision.gameObject.name);
+            //Debug.Log(gameObject.name + " " + collision.gameObject.name);
         }
         public void SetHpIndicatorSizeAndColor(Vector2 indicatorCize, Color color)
         {

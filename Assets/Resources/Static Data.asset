@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldData: {fileID: 11400000, guid: cab13819d0c739e46a9fb162e1bb4c9e, type: 2}
   playerData: {fileID: 11400000, guid: 89ac9be293bfef24ebb4c26599029ae1, type: 2}
+  UIData: {fileID: 11400000, guid: 83e7c30c9d9f4cc4cbbb92f8ab54a986, type: 2}
+  buildingData: {fileID: 11400000, guid: 972269aa7e97e6b418389d3a09cf9276, type: 2}

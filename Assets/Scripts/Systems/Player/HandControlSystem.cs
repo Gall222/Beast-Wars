@@ -1,7 +1,9 @@
 using Game.Components;
+using Game.UI.Views;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Game.Systems.PlayerControl
 {
@@ -17,59 +19,72 @@ namespace Game.Systems.PlayerControl
                 ref var playerComponent = ref _playerFilter.Pools.Inc1.Get(entity);
                 ref var unitComponent = ref _playerFilter.Pools.Inc2.Get(entity);
 
-                var hand = playerComponent.view.hand;
-                var rb = hand.GetComponent<Rigidbody2D>();
-                _initialWorldPosition = playerComponent.view.transform.
-                    TransformPoint(playerComponent.handInitialPosition);
+                ActiveTool ativeTool = playerComponent.currentTool.view;
+                GameObject stuffPlace = playerComponent.view.StuffPlace;
+                Rigidbody2D rb = playerComponent.currentTool.rb;
+                Collider2D collider = playerComponent.currentTool.collider;
 
-                if (playerComponent.leftMouseDown)
+                _initialWorldPosition = stuffPlace.transform.position;
+
+                if (playerComponent.leftMouseDown && !EventSystem.current.IsPointerOverGameObject())
                 {
                     Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     mousePosition.z = 0;
 
-                    var direction = GetDirection(mousePosition, ref playerComponent);
-
+                    Vector3 direction = GetDirection(mousePosition - _initialWorldPosition, ref playerComponent);
                     Vector3 targetPosition = _initialWorldPosition + direction;
+                    //Debug.Log(_initialWorldPosition);
+                    if (ativeTool && ativeTool.IsTouchingAnotherObject)
+                    {
+                        rb.MovePosition(Vector3.Lerp(rb.position, _initialWorldPosition, 0.1f));
+                    }
+                    else
+                    {
+                        rb.MovePosition(Vector3.Lerp(rb.position, targetPosition,
+                    Time.deltaTime * playerComponent.handMoveSpeed));
+                    }
 
-                    rb.MovePosition(Vector3.Lerp(hand.transform.position, targetPosition, 
-                        Time.deltaTime * playerComponent.handMoveSpeed));
-                    Rotate(direction, ref unitComponent, ref rb);
+                    RotateAroundPivot(direction, ref unitComponent, ref rb, _initialWorldPosition, playerComponent);
+                    collider.enabled = true;
                 }
                 else
                 {
-                    rb.MovePosition(_initialWorldPosition);
+                    collider.enabled = false;
+                    rb.MovePosition(playerComponent.view.transform.TransformPoint(playerComponent.toolInitialPosition));
                     rb.MoveRotation(0);
                 }
             }
         }
 
-        private Vector3 GetDirection(Vector3 mousePosition, ref PlayerComponent playerComponent)
+        private void SwitchToolCollider()
         {
-            Vector3 direction = mousePosition - _initialWorldPosition;
 
-            if (direction.magnitude > playerComponent.maxHandDistance)
-            {
-                direction.Normalize();
-                direction *= playerComponent.maxHandDistance;
-            }
-
-            return direction;
         }
 
-        private void Rotate(Vector3 direction, ref UnitComponent unitComponent, ref Rigidbody2D rb)
+        private Vector3 GetDirection(Vector3 rawDirection, ref PlayerComponent playerComponent)
         {
+            if (rawDirection.magnitude > playerComponent.maxHandDistance)
+            {
+                rawDirection.Normalize();
+                rawDirection *= playerComponent.maxHandDistance;
+            }
+            return rawDirection;
+        }
+
+        private void RotateAroundPivot(Vector3 direction, ref UnitComponent unitComponent,
+    ref Rigidbody2D rb, Vector3 pivotPoint, PlayerComponent playerComponent)
+        {
+            // Рассчитываем угол относительно точки вращения
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            if (unitComponent.transform.localScale.x < 0)
-            {
-                angle += 110f;
-            }
-            else
-            {
-                angle += 70f;
-            }
+            // Корректировка угла для отражения персонажа
+            angle += unitComponent.transform.localScale.x < 0 ? 150f : 30f;
+
+            Vector3 newPosition = pivotPoint + direction.normalized *
+                Mathf.Clamp(direction.magnitude, 0, playerComponent.maxHandDistance);
 
             rb.MoveRotation(angle);
+            rb.MovePosition(newPosition);
         }
     }
 }

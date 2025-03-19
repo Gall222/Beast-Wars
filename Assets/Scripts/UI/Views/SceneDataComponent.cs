@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Tilemaps;
 using Unity.Cinemachine;
+using static PlasticGui.WorkspaceWindow.Items.LockRules.LockRuleGenerator;
 
 namespace Game.UI.Views
 {
@@ -11,19 +12,23 @@ namespace Game.UI.Views
     {
         //private int _score = 0;
         private float _volume = 0.5f;
-
         [Header("World")]
         public Canvas canvas;
+        public RuleTile groundTile;
+        public RuleTile backgroundTile;
+        public Tilemap background;
+        public Foreground foreground;
+        public GameObject skillPanel;
         [Header("Camera")]
         public CinemachineVirtualCameraBase playerCamera;
         [Header("Player")]
         //public PlayerComponent playerComponent;
         public Transform playerSpawnPosition;
         [Header("Map Settings")]
-        //public int horizontalSize = 100;
-        //public int verticalSize = 40;
-        //public float emptyTileChance = 2;
-        //public float caveChance = 70;
+        public int horizontalSize = 100;
+        public int verticalSize = 40;
+        public float emptyTileChance = 2;
+        public float caveChance = 70;
         //public CinemachineVirtualCamera virtualCamera;
         //[Header("UI")]
         //public TextMeshProUGUI scoreText;

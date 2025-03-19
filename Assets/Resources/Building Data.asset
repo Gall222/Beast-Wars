@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c3f38445bae64d4d81fe1967b11cdb1, type: 3}
+  m_Name: Building Data
+  m_EditorClassIdentifier: 
+  stone: {fileID: 3620713208321125042, guid: ceabd4a78cf5ca347b91f61625085fa5, type: 3}

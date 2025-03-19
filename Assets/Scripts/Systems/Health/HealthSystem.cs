@@ -79,16 +79,18 @@ namespace Game.Systems.Health
             var person = healthComponent.view.gameObject.GetComponent<Player>();
             if (person == null) { return; }
             
-            person.hand.transform.SetParent(healthComponent.view.DethParts[0].transform);
-            var joint = person.hand.AddComponent<HingeJoint2D>();
+            person.handSprites.transform.SetParent(healthComponent.view.DethParts[0].transform);
+            var joint = person.handSprites.AddComponent<HingeJoint2D>();
             joint.connectedBody = healthComponent.view.GetComponent<Rigidbody2D>();
-            person.hand.transform.localPosition = Vector3.zero;
+            person.handSprites.transform.localPosition = Vector3.zero;
             person.Eyes.enabled = true;
             Object.Destroy(person.Hp);
         }
 
         private bool IsTouchReached(HealthAffector healthAffector)
         {
+            if(healthAffector.isActive == false) return false;
+
             var affectorVelocity = healthAffector.Rb.position - healthAffector.LastPosition;
 
             return affectorVelocity.x >= healthAffector.ContactVelocityLimit.x || 
@@ -100,6 +102,8 @@ namespace Game.Systems.Health
             var backHpIndicator = healthComponent.view.BackHpIndicator;
             var hpIndicator = healthComponent.view.HpIndicator;
             Color color = healthComponent.view.SpriteRendererHpIndicator.color;
+
+            if (backHpIndicator == null || hpIndicator == null) { return; }
 
             if (healthComponent.currentHp <= healthComponent.maxHp / 2 && 
                 healthComponent.currentHp > healthComponent.maxHp / 3)

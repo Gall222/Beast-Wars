@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1756968055243800917}
   m_Layer: 7
   m_Name: bat
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18283e9ec86c5e440be5ea6350bce473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bodyCollider: {fileID: 3326484180152125966}
+  _bodyCollider: {fileID: 0}
 --- !u!114 &1756968055243800917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _contactVelocityLimit: {x: 0.3, y: 0.3}
   _power: 50
+  isActive: 1
 --- !u!1 &8758323094850113673
 GameObject:
   m_ObjectHideFlags: 0

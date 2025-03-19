@@ -10,7 +10,7 @@ namespace Game.UI.Views
         public GameObject weapon;
         [Header("Hand")]
         [SerializeField]
-        public GameObject hand;
+        public GameObject handSprites;
         [SerializeField]
         private GameObject _stuffPlace;
         [Header("Body parts")]
