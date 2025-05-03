@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Data
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Game Data/World Data")]
     public class WorldData : ScriptableObject
     {
         public GameObject testPref;

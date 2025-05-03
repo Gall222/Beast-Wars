@@ -14,8 +14,7 @@ namespace Game.UI.Views
         private float _volume = 0.5f;
         [Header("World")]
         public Canvas canvas;
-        public RuleTile groundTile;
-        public RuleTile backgroundTile;
+        public Tilemap effectsMap;
         public Tilemap background;
         public Foreground foreground;
         public GameObject skillPanel;

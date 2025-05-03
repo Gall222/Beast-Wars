@@ -30,7 +30,7 @@ namespace Game.Data
 
         public void Init(SkillType BuildButton) 
         {
-            var buildingData = Resources.Load<BuildingData>("Building Data");
+            var buildingData = Resources.Load<BuildingData>("Static Data/Building Data");
 
             _skillTypesList = new Dictionary<SkillTypes, SkillType>()
             {

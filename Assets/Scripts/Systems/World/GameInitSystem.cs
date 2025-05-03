@@ -44,7 +44,7 @@ namespace Game.Systems.World
                     }
                     else
                     {
-                        _sceneData.Value.foreground.Tilemap.SetTile(new Vector3Int(x, y, 0), _sceneData.Value.groundTile);
+                        _sceneData.Value.foreground.Tilemap.SetTile(new Vector3Int(x, y, 0), _staticData.Value.tilemapData.groundTile);
                     }
                 }
             }
@@ -55,7 +55,7 @@ namespace Game.Systems.World
             {
                 for (int y = 0; y < _sceneData.Value.verticalSize; y++)
                 {
-                    _sceneData.Value.background.SetTile(new Vector3Int(x, y, 0), _sceneData.Value.backgroundTile);
+                    _sceneData.Value.background.SetTile(new Vector3Int(x, y, 0), _staticData.Value.tilemapData.backgroundTile);
                 }
             }
         }
@@ -63,13 +63,13 @@ namespace Game.Systems.World
         {
             for (int x = -1; x < _sceneData.Value.horizontalSize; x++)
             {
-                _sceneData.Value.foreground.Tilemap.SetTile(new Vector3Int(x, -1, 0), _sceneData.Value.groundTile);
-                _sceneData.Value.foreground.Tilemap.SetTile(new Vector3Int(x, _sceneData.Value.verticalSize * 2, 0), _sceneData.Value.groundTile);
+                _sceneData.Value.foreground.Tilemap.SetTile(new Vector3Int(x, -1, 0), _staticData.Value.tilemapData.groundTile);
+                _sceneData.Value.foreground.Tilemap.SetTile(new Vector3Int(x, _sceneData.Value.verticalSize * 2, 0), _staticData.Value.tilemapData.groundTile);
             }
             for (int y = -1; y < _sceneData.Value.verticalSize * 2; y++)
             {
-                _sceneData.Value.foreground.Tilemap.SetTile(new Vector3Int(-1, y, 0), _sceneData.Value.groundTile);
-                _sceneData.Value.foreground.Tilemap.SetTile(new Vector3Int(_sceneData.Value.horizontalSize, y, 0), _sceneData.Value.groundTile);
+                _sceneData.Value.foreground.Tilemap.SetTile(new Vector3Int(-1, y, 0), _staticData.Value.tilemapData.groundTile);
+                _sceneData.Value.foreground.Tilemap.SetTile(new Vector3Int(_sceneData.Value.horizontalSize, y, 0), _staticData.Value.tilemapData.groundTile);
             }
         }
         private bool IsEmptyTilesNearExist(Vector2 tileCoordinates)

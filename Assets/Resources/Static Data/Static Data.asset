@@ -16,3 +16,4 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: 89ac9be293bfef24ebb4c26599029ae1, type: 2}
   UIData: {fileID: 11400000, guid: 83e7c30c9d9f4cc4cbbb92f8ab54a986, type: 2}
   buildingData: {fileID: 11400000, guid: 972269aa7e97e6b418389d3a09cf9276, type: 2}
+  tilemapData: {fileID: 11400000, guid: 500ce7b616373b8428293d7255ab944e, type: 2}

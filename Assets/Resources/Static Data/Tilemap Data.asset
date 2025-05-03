@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dffe13c89b09084ebb7e13e001ed15c, type: 3}
+  m_Name: Tilemap Data
+  m_EditorClassIdentifier: 
+  groundTile: {fileID: 11400000, guid: a12cd8524eaa1a44bb74d29c5b7a1a64, type: 2}
+  backgroundTile: {fileID: 11400000, guid: f04c531c220b41740962265905ba8e6f, type: 2}
+  lightDestuction: {fileID: 11400000, guid: 1128f81cf5ab80b4b902176815a45d11, type: 2}
+  middleDestuction: {fileID: 11400000, guid: 77e6bc2fe7a63c04b8ad00b4d30e01ff, type: 2}

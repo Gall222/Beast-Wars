@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Data
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Game Data/Player Data")]
     public class PlayerData : ScriptableObject
     {
         public GameObject playerPref;

@@ -72,7 +72,7 @@ namespace Game.Systems.PlayerControl
             toolComponent.view = tool;
             toolComponent.rb = tool.GetComponent<Rigidbody2D>();
             toolComponent.collider = tool.GetComponent<Collider2D>();
-            Debug.Log(playerComponent.toolInitialPosition);
+            //Debug.Log(playerComponent.toolInitialPosition);
             playerComponent.currentTool = toolComponent;
             //playerComponent.handAndStuffPositionOffset =
             //    playerComponent.view.handSprites.transform.position - tool.transform.position;

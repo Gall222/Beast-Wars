@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Data
 {
-    [CreateAssetMenu]
+    [CreateAssetMenu(menuName = "Game Data/Building Data")]
     public class BuildingData : ScriptableObject
     {
         public GameObject stone;
